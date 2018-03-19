@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         okHttpResponse = findViewById(R.id.okhttp_response);
         MainViewModel model = ViewModelProviders.of(this).get(MainViewModel.class);
-        DisposableSubscriber<String> s = new DisposableSubscriber<String>() {
+        DisposableObserver<String> s = new DisposableObserver<String>() {
             @Override
             public void onNext(String s) {
                 okHttpResponse.setText(s);
